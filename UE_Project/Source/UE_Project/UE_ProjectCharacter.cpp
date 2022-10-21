@@ -42,7 +42,8 @@ AUE_ProjectCharacter::AUE_ProjectCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); 
 	FollowCamera->bUsePawnControlRotation = false; 
 
-
+	// Ability System
+	AbilitySystem = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystem"));
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -127,7 +128,22 @@ void AUE_ProjectCharacter::MoveRight(float Value)
 	}
 }
 
+// Ability System
 void AUE_ProjectCharacter::BeginPlay()
 {
-	AbilitySystem = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystem"));
+	Super::BeginPlay();
+
+	if (AbilitySystem && AttrDataTable)
+	{
+		const UAttributeSet* Attrs = AbilitySystem->InitStats(UPlayerAttributes::StaticClass(), AttrDataTable);
+	}
+
+	if (bAttDebugging)
+	{
+		for (size_t i = 0; i < DebuggingPassiveAbility.Num(); i++)
+		{
+			FGameplayAbilitySpecHandle specHandle = AbilitySystem->GiveAbility(FGameplayAbilitySpec(DebuggingPassiveAbility[i].GetDefaultObject(), 1, 0));
+			AbilitySystem->CallServerTryActivateAbility(specHandle, false, FPredictionKey());
+		}
+	}
 }
