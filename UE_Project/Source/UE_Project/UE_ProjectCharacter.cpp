@@ -15,6 +15,9 @@
 AUE_ProjectCharacter::AUE_ProjectCharacter()
 {
 
+	// Ability System
+	AbilitySystem = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystem"));
+
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
 
@@ -42,8 +45,7 @@ AUE_ProjectCharacter::AUE_ProjectCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); 
 	FollowCamera->bUsePawnControlRotation = false; 
 
-	// Ability System
-	AbilitySystem = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystem"));
+	
 }
 
 //////////////////////////////////////////////////////////////////////////
