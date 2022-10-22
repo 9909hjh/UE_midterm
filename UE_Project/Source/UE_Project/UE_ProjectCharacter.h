@@ -35,7 +35,10 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities", meta = (AllowPrivateAccess = "ture"))
 		class UAbilitySystemComponent* AbilitySystem;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Abilities")
+	//UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Abilities")
+		//UDataTable* AttrDataTable;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
 		UDataTable* AttrDataTable;
 
 	UPROPERTY(EditAnywhere, BlueprintReadwrite, Category = "Abilities  | Debugging")
@@ -43,6 +46,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadwrite, Category = "Abilities  | Debugging")
 		TArray<TSubclassOf<class UGameplayAbility>> DebuggingPassiveAbility;
+
+	UPROPERTY(EditAnywhere, BlueprintReadwrite, Category = "Abilities")
+		TArray<TSubclassOf<class UGameplayAbility>> StartingPassiveAbility;
 
 protected:
 

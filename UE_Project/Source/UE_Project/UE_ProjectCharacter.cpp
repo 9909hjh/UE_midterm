@@ -145,5 +145,11 @@ void AUE_ProjectCharacter::BeginPlay()
 			FGameplayAbilitySpecHandle specHandle = AbilitySystem->GiveAbility(FGameplayAbilitySpec(DebuggingPassiveAbility[i].GetDefaultObject(), 1, 0));
 			AbilitySystem->CallServerTryActivateAbility(specHandle, false, FPredictionKey());
 		}
+
+		for (size_t i = 0; i < StartingPassiveAbility.Num(); i++)
+		{
+			FGameplayAbilitySpecHandle specHandle = AbilitySystem->GiveAbility(FGameplayAbilitySpec(StartingPassiveAbility[i].GetDefaultObject(), 1, 0));
+			AbilitySystem->CallServerTryActivateAbility(specHandle, false, FPredictionKey());
+		}
 	}
 }
